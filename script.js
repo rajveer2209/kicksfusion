@@ -101,6 +101,34 @@ function startAutoSlide() {
 if (els.carouselNext) els.carouselNext.addEventListener("click", () => { nextSlide(); startAutoSlide(); });
 if (els.carouselPrev) els.carouselPrev.addEventListener("click", () => { prevSlide(); startAutoSlide(); });
 
+// -------- SWIPE SUPPORT --------
+function setupSwipe() {
+  const track = document.getElementById("carousel-track");
+  if (!track) return;
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  track.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    const threshold = 50;
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+      startAutoSlide();
+    }
+  }, { passive: true });
+}
+
 // -------- HERO → SMOOTH SCROLL TO CATEGORIES --------
 document.querySelectorAll('.slide-btn[href="#categories"]').forEach(btn => {
   btn.addEventListener("click", (e) => {
@@ -160,5 +188,6 @@ function setupReveal() {
 // -------- INIT --------
 document.addEventListener("DOMContentLoaded", () => {
   initCarousel();
+  setupSwipe();
   setupReveal();
 });

@@ -39,6 +39,8 @@
   border-radius: 12px;
   overflow: hidden;
   aspect-ratio: 1;
+  user-select: none;
+  touch-action: pan-y;
 }
 
 .pdp-image-wrapper img {

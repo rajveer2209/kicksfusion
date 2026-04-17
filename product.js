@@ -82,6 +82,38 @@ function init() {
           updateMainImage(newIndex);
         };
       }
+
+      // Add Touch Swipe Support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      pdpImage.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      pdpImage.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+
+      function handleSwipe() {
+        const threshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > threshold) {
+          if (diff > 0) {
+            // Swipe Left -> Next
+            let newIndex = currentImageIndex + 1;
+            if (newIndex >= total) newIndex = 0;
+            updateMainImage(newIndex);
+          } else {
+            // Swipe Right -> Prev
+            let newIndex = currentImageIndex - 1;
+            if (newIndex < 0) newIndex = total - 1;
+            updateMainImage(newIndex);
+          }
+        }
+      }
     }
   } else {
     if (pdpThumbnails) pdpThumbnails.style.display = "none";
