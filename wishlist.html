@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KicksFusion — My Wishlist</title>
+  <meta name="description" content="Your saved sneakers at KicksFusion. View and manage your wishlist of premium replica sneakers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="category.css" />
+  <style>
+    .empty-wishlist {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .empty-wishlist .empty-heart {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      opacity: 0.2;
+    }
+    .empty-wishlist h3 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+    .empty-wishlist p {
+      color: var(--mid-grey);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+    .empty-wishlist .explore-btn {
+      display: inline-block;
+      margin-top: 24px;
+      padding: 14px 40px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: 0.3s ease;
+    }
+    .empty-wishlist .explore-btn:hover {
+      background: var(--red);
+    }
+
+    /* Heart icon in the banner */
+    .cat-hero-heart {
+      position: absolute;
+      top: 50%;
+      right: 8%;
+      transform: translateY(-50%);
+      z-index: 3;
+      opacity: 0.15;
+      animation: heartPulse 2s ease-in-out infinite;
+    }
+    .cat-hero-heart svg {
+      width: clamp(80px, 12vw, 160px);
+      height: clamp(80px, 12vw, 160px);
+      fill: #fff;
+      filter: drop-shadow(0 0 30px rgba(224, 48, 48, 0.5));
+    }
+    @keyframes heartPulse {
+      0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.15; }
+      50% { transform: translateY(-50%) scale(1.08); opacity: 0.25; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== ANNOUNCEMENT BAR ========== -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="announcement-track">
+      <div class="announcement-content">
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+        <span class="ann-divider">|</span>
+        <span>📍 STORE IN DELHI — VISIT US!</span>
+        <span class="ann-divider">|</span>
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+        <span class="ann-divider">|</span>
+        <span>📍 STORE IN DELHI — VISIT US!</span>
+      </div>
+      <div class="announcement-content">
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+        <span class="ann-divider">|</span>
+        <span>📍 STORE IN DELHI — VISIT US!</span>
+        <span class="ann-divider">|</span>
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+        <span class="ann-divider">|</span>
+        <span>📍 STORE IN DELHI — VISIT US!</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="index.html" class="logo" id="logo">KICKSFUSION</a>
+      <div class="nav-icons">
+        <button class="nav-icon-btn" id="search-toggle" aria-label="Search">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="nav-icon-btn nav-wishlist-btn" id="wishlist-toggle" aria-label="Wishlist">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span class="wishlist-count" id="wishlist-count">0</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-links-bar">
+      <div class="nav-links-container">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="category.html?cat=sports" class="nav-link">SPORTS</a>
+        <a href="category.html?cat=casual" class="nav-link">CASUAL</a>
+        <a href="category.html?cat=basketball" class="nav-link">BASKETBALL</a>
+        <a href="category.html?cat=hot-picks" class="nav-link">HOT PICKS</a>
+        <a href="category.html?cat=sale" class="nav-link sale-link">SALE 🔥</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== MOBILE MENU ========== -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="mobile-menu-title">MENU</span>
+      <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-menu-links">
+      <a href="index.html">HOME</a>
+      <a href="category.html?cat=sports">SPORTS</a>
+      <a href="category.html?cat=casual">CASUAL</a>
+      <a href="category.html?cat=basketball">BASKETBALL</a>
+      <a href="category.html?cat=hot-picks">HOT PICKS</a>
+      <a href="category.html?cat=sale" class="sale-link">SALE 🔥</a>
+    </div>
+  </div>
+  <div class="menu-overlay" id="menu-overlay"></div>
+
+  <!-- ========== SEARCH BAR ========== -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-bar-wrapper">
+      <input type="text" class="search-input" id="search-input" placeholder="Search sneakers, brands, styles..." />
+      <button class="search-close" id="search-close" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-suggestions">
+      <span class="search-tag">Jordan 1</span>
+      <span class="search-tag">Dunks</span>
+      <span class="search-tag">New Balance 550</span>
+      <span class="search-tag">Yeezy</span>
+      <span class="search-tag">Air Force 1</span>
+      <span class="search-tag">On Running</span>
+    </div>
+  </div>
+
+  <!-- ========== WISHLIST HERO BANNER ========== -->
+  <section class="cat-hero" id="cat-hero" style="background-image: url('wishlist-banner.png');">
+    <div class="cat-hero-overlay"></div>
+    <!-- Animated Heart SVG -->
+    <div class="cat-hero-heart">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    </div>
+    <div class="cat-hero-content">
+      <nav class="breadcrumb" id="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span id="breadcrumb-cat">Wishlist</span>
+      </nav>
+      <h1 id="cat-title">MY WISHLIST ♥</h1>
+      <p id="cat-count">0 products</p>
+    </div>
+  </section>
+
+  <!-- ========== FILTER BAR ========== -->
+  <div class="filter-bar">
+    <div class="filter-container">
+      <div class="filter-left">
+        <span class="filter-label" id="results-count">Showing 0 products</span>
+      </div>
+      <div class="filter-right">
+        <label class="sort-label" for="sort-select">Sort by:</label>
+        <select class="sort-select" id="sort-select">
+          <option value="default">Recently Added</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name-az">Name: A-Z</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PRODUCT GRID ========== -->
+  <section class="cat-products">
+    <div class="cat-products-container">
+      <div class="cat-product-grid" id="cat-product-grid">
+        <!-- JS injects wishlist product cards -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand-col">
+          <a href="index.html" class="footer-logo">KICKSFUSION</a>
+          <p class="footer-desc">Your destination for superb replica sneakers. Sports, Casual & Basketball. Lowest prices, always.</p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/_kicks_fusion_/" target="_blank" aria-label="Instagram" class="social-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="category.html?cat=sports">Sports</a></li>
+            <li><a href="category.html?cat=casual">Casual</a></li>
+            <li><a href="category.html?cat=basketball">Basketball</a></li>
+            <li><a href="category.html?cat=hot-picks">Hot Picks</a></li>
+            <li><a href="category.html?cat=sale">Sale</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>HELP</h4>
+          <ul>
+            <li><a href="https://wa.me/918830056741?text=Hi!%20I%20want%20to%20track%20my%20order." target="_blank">Track My Order</a></li>
+            <li><a href="https://wa.me/918830056741?text=Hi!%20I%20need%20help." target="_blank">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="index.html#about">About Us</a></li>
+            <li><a href="https://www.google.com/maps/place/Delhi" target="_blank">📍 Store — Delhi</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>POLICIES</h4>
+          <ul>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Shipping — 5–7 Days</a></li>
+            <li><a href="#">Exchange Only — Video Required</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 KicksFusion. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== TOAST ========== -->
+  <div class="toast" id="toast">
+    <span class="toast-msg" id="toast-msg"></span>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="wishlist.js"></script>
+</body>
+</html>

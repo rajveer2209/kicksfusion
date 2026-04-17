@@ -1,0 +1,10 @@
+# System Files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Project specific
+node_modules/
+.env

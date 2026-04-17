@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KicksFusion — Premium Sneakers Store</title>
+  <meta name="description" content="Shop premium replica sneakers at KicksFusion. Sports, Casual & Basketball shoes. Air Jordans, Nike Dunks, Yeezys, New Balance and more. Superb quality at the lowest prices." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ========== ANNOUNCEMENT BAR ========== -->
+  <div class="announcement-bar" id="announcement-bar">
+    <div class="announcement-track">
+      <div class="announcement-content">
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+        <span class="ann-divider">|</span>
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+      </div>
+      <div class="announcement-content">
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+        <span class="ann-divider">|</span>
+        <span>🔥 SUMMER SALE LIVE — UP TO 40% OFF!</span>
+        <span class="ann-divider">|</span>
+        <span>FREE SHIPPING ON ORDERS OVER ₹5,000</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+
+      <a href="#" class="logo" id="logo">KICKSFUSION</a>
+
+      <div class="nav-icons">
+        <button class="nav-icon-btn" id="search-toggle" aria-label="Search">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <a href="wishlist.html" class="nav-icon-btn nav-wishlist-btn" id="wishlist-toggle" aria-label="Wishlist">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <span class="wishlist-count" id="wishlist-count">0</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Desktop Nav Links -->
+    <div class="nav-links-bar">
+      <div class="nav-links-container">
+        <a href="index.html" class="nav-link active">HOME</a>
+        <a href="category.html?cat=sports" class="nav-link">SPORTS</a>
+        <a href="category.html?cat=casual" class="nav-link">CASUAL</a>
+        <a href="category.html?cat=basketball" class="nav-link">BASKETBALL</a>
+        <a href="category.html?cat=hot-picks" class="nav-link">HOT PICKS</a>
+        <a href="category.html?cat=sale" class="nav-link sale-link">SALE 🔥</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== MOBILE MENU ========== -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-header">
+      <span class="mobile-menu-title">MENU</span>
+      <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-menu-links">
+      <a href="index.html">HOME</a>
+      <a href="category.html?cat=sports">SPORTS</a>
+      <a href="category.html?cat=casual">CASUAL</a>
+      <a href="category.html?cat=basketball">BASKETBALL</a>
+      <a href="category.html?cat=hot-picks">HOT PICKS</a>
+      <a href="category.html?cat=sale" class="sale-link">SALE 🔥</a>
+    </div>
+  </div>
+  <div class="menu-overlay" id="menu-overlay"></div>
+
+  <!-- ========== SEARCH BAR ========== -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-bar-wrapper">
+      <input type="text" class="search-input" id="search-input" placeholder="Search sneakers, brands, styles..." />
+      <button class="search-close" id="search-close" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-suggestions">
+      <span class="search-tag">Jordan 1</span>
+      <span class="search-tag">Dunks</span>
+      <span class="search-tag">New Balance 550</span>
+      <span class="search-tag">Yeezy</span>
+      <span class="search-tag">Air Force 1</span>
+      <span class="search-tag">On Running</span>
+    </div>
+  </div>
+
+  <!-- ========== HERO CAROUSEL ========== -->
+  <section class="hero-carousel" id="home">
+    <div class="carousel-track" id="carousel-track">
+      <div class="carousel-slide active" style="background-image: url('hero-banner.png');">
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <span class="slide-tag">NEW ARRIVAL</span>
+          <h1>SUMMER<br/>COLLECTION 2026</h1>
+          <p>The hottest drops of the season are here</p>
+          <a href="#categories" class="slide-btn" id="hero-shop-btn">SHOP NOW</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========== TRENDING TICKER ========== -->
+  <section class="trending-ticker">
+    <div class="ticker-label">TRENDING NOW</div>
+    <div class="ticker-track">
+      <div class="ticker-content">
+        <a href="#" class="ticker-item">Jordan 4 Retro Lakers</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">New Balance 9060 Black</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">Nike SB Dunk Low</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">On Running Cloudtilt</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">Adidas Samba OG</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">Yeezy Slides Bone</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">Jordan 4 Retro Lakers</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">New Balance 9060 Black</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">Nike SB Dunk Low</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">On Running Cloudtilt</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">Adidas Samba OG</a>
+        <span class="ticker-dot">●</span>
+        <a href="#" class="ticker-item">Yeezy Slides Bone</a>
+        <span class="ticker-dot">●</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CATEGORY GRID ========== -->
+  <section class="category-section" id="categories">
+    <h2 class="section-title centered">SHOP BY CATEGORY</h2>
+    <div class="category-grid">
+      <a href="category.html?cat=sports" class="cat-block cat-animate" id="cat-sports">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Sports Sneakers" loading="lazy"/>
+        <div class="cat-label">SPORTS</div>
+      </a>
+      <a href="category.html?cat=casual" class="cat-block cat-animate" id="cat-casual">
+        <img src="af1_1.jpg" alt="Casual Sneakers" loading="lazy"/>
+        <div class="cat-label">CASUAL</div>
+      </a>
+      <a href="category.html?cat=basketball" class="cat-block cat-animate" id="cat-basketball">
+        <img src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600&q=80" alt="Basketball Sneakers" loading="lazy"/>
+        <div class="cat-label">BASKETBALL</div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ========== BRAND MARQUEE ========== -->
+  <section class="brand-marquee">
+    <div class="brand-track">
+      <div class="brand-items">
+        <span>NIKE</span><span>JORDAN</span><span>ADIDAS</span><span>NEW BALANCE</span>
+        <span>PUMA</span><span>ASICS</span><span>ON RUNNING</span><span>CONVERSE</span>
+        <span>VANS</span><span>YEEZY</span><span>SALOMON</span><span>REEBOK</span>
+        <span>NIKE</span><span>JORDAN</span><span>ADIDAS</span><span>NEW BALANCE</span>
+        <span>PUMA</span><span>ASICS</span><span>ON RUNNING</span><span>CONVERSE</span>
+        <span>VANS</span><span>YEEZY</span><span>SALOMON</span><span>REEBOK</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== KICKSFUSION EXPERIENCE ========== -->
+  <section class="experience-section" id="experience">
+    <h2 class="section-title centered">THE KICKSFUSION EXPERIENCE</h2>
+    <div class="experience-grid">
+      <div class="exp-card" id="exp-replicas">
+        <div class="exp-icon">⭐</div>
+        <h3>SUPERB REPLICAS</h3>
+        <p>Premium quality replicas in excellent condition, indistinguishable from originals</p>
+      </div>
+      <div class="exp-card" id="exp-shipping">
+        <div class="exp-icon">📦</div>
+        <h3>FAST SHIPPING</h3>
+        <p>Delivered to your doorstep in 5–7 business days</p>
+      </div>
+      <div class="exp-card" id="exp-returns">
+        <div class="exp-icon">🔄</div>
+        <h3>EXCHANGE ONLY</h3>
+        <p>No returns — only exchange with unboxing video proof</p>
+      </div>
+      <div class="exp-card" id="exp-payment">
+        <div class="exp-icon">💵</div>
+        <h3>EASY PAYMENT</h3>
+        <p>COD & UPI available — pay however you like</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT US ========== -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <h2 class="section-title centered">ABOUT US</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p class="about-lead">Welcome to <strong>KicksFusion</strong> — your one-stop destination for premium replica sneakers at unbeatable prices.</p>
+          <p>We specialize in sourcing the highest quality replica sneakers that look, feel, and perform just like the originals. Every pair goes through our meticulous quality inspection to ensure superb craftsmanship, premium materials, and flawless finishing.</p>
+          <p>Whether you're after the latest Jordans, classic Air Force 1s, or trending New Balance — we've got you covered at a fraction of the retail price. No compromises on quality, no breaking the bank.</p>
+          <div class="about-highlights">
+            <div class="about-highlight">
+              <span class="about-highlight-num">500+</span>
+              <span class="about-highlight-label">Happy Customers</span>
+            </div>
+            <div class="about-highlight">
+              <span class="about-highlight-num">50+</span>
+              <span class="about-highlight-label">Sneaker Styles</span>
+            </div>
+            <div class="about-highlight">
+              <span class="about-highlight-num">⭐ 4.8</span>
+              <span class="about-highlight-label">Average Rating</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NEWSLETTER ========== -->
+  <section class="newsletter-section" id="newsletter">
+    <div class="newsletter-inner">
+      <h2>JOIN THE CREW</h2>
+      <p>Sign up for exclusive drops, early access, and special offers</p>
+      <form class="newsletter-form" id="newsletter-form">
+        <input type="email" id="newsletter-email" placeholder="Enter your email" required />
+        <button type="submit" class="newsletter-btn">SUBSCRIBE</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand-col">
+          <a href="#" class="footer-logo">KICKSFUSION</a>
+          <p class="footer-desc">Your destination for superb replica sneakers. Sports, Casual & Basketball. Lowest prices, always.</p>
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/_kicks_fusion_/" target="_blank" aria-label="Instagram" class="social-link">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>SHOP</h4>
+          <ul>
+            <li><a href="category.html?cat=sports">Sports</a></li>
+            <li><a href="category.html?cat=casual">Casual</a></li>
+            <li><a href="category.html?cat=basketball">Basketball</a></li>
+            <li><a href="category.html?cat=hot-picks">Hot Picks</a></li>
+            <li><a href="category.html?cat=sale">Sale</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>HELP</h4>
+          <ul>
+            <li><a href="https://wa.me/918830056741?text=Hi!%20I%20want%20to%20track%20my%20order." target="_blank">Track My Order</a></li>
+            <li><a href="https://wa.me/918830056741?text=Hi!%20I%20need%20help." target="_blank">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ABOUT</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="https://www.google.com/maps/place/Delhi" target="_blank">📍 Store — Delhi</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>POLICIES</h4>
+          <ul>
+
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Shipping — 5–7 Days</a></li>
+            <li><a href="#">Exchange Only — Video Required</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 KicksFusion. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== TOAST ========== -->
+  <div class="toast" id="toast">
+    <span class="toast-msg" id="toast-msg"></span>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
