@@ -232,10 +232,52 @@ function showToast(msg) {
 // -------- NEWSLETTER --------
 els.newsletterForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = document.getElementById("newsletter-email").value;
+  const emailInput = document.getElementById("newsletter-email");
+  const email = emailInput.value;
+  const btn = els.newsletterForm.querySelector(".newsletter-btn");
+  
   if (email) {
-    showToast("You're in! Welcome to the KicksFusion crew 🎉");
-    els.newsletterForm.reset();
+    const originalText = btn.textContent;
+    btn.textContent = "SENDING...";
+    btn.disabled = true;
+
+    // EmailJS Config: 
+    // 1. Create a free account at https://www.emailjs.com/
+    // 2. Add an Email Service (e.g., Gmail) to get your SERVICE_ID
+    // 3. Create an Email Template with a variable like {{to_email}} and get TEMPLATE_ID
+    // 4. Get your PUBLIC_KEY from Account -> API Keys
+    const SERVICE_ID = "YOUR_SERVICE_ID"; 
+    const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+    const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+
+    const templateParams = {
+      to_email: email,
+      subject: "Welcome to the KicksFusion Crew! 👟",
+      message: "Hey there! Thanks for subscribing to KicksFusion. You'll be the first to know about our new sneaker drops, exclusive discounts, and secret sales!"
+    };
+
+    // If EmailJS is configured, send the email
+    if (typeof emailjs !== "undefined" && SERVICE_ID !== "YOUR_SERVICE_ID") {
+      emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+        .then(() => {
+          showToast("You're in! Welcome email sent to your inbox 🎉");
+          els.newsletterForm.reset();
+        })
+        .catch((error) => {
+          console.error("EmailJS Error:", error);
+          showToast("Oops! Failed to send email. Try again later.");
+        })
+        .finally(() => {
+          btn.textContent = originalText;
+          btn.disabled = false;
+        });
+    } else {
+      // Fallback message if keys are not set up yet
+      showToast("You're in! (Setup EmailJS to send real emails) 🎉");
+      els.newsletterForm.reset();
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }
   }
 });
 
