@@ -286,23 +286,44 @@ function renderReviews() {
 // -------- Suggested Pairs --------
 function renderSuggested(catKey, currentId) {
   const grid = document.getElementById("pdp-suggested-grid");
-  if (!catKey || !PRODUCTS[catKey]) return;
 
-  // Get other products from same category, exclude current
-  const others = PRODUCTS[catKey].items.filter(p => p.id !== currentId);
-  const picks = others.sort(() => Math.random() - 0.5).slice(0, 4);
+  // Collect all unique products across ALL real categories, exclude current
+  const allProducts = [];
+  const seen = new Set();
+  for (const [key, cat] of Object.entries(PRODUCTS)) {
+    if (key === "sale") continue;
+    for (const p of cat.items) {
+      if (p.id !== currentId && !seen.has(p.id)) {
+        seen.add(p.id);
+        allProducts.push(p);
+      }
+    }
+  }
 
-  grid.innerHTML = picks.map(p => `
+  // Shuffle and pick up to 4
+  const picks = allProducts.sort(() => Math.random() - 0.5).slice(0, 4);
+
+  if (picks.length === 0) {
+    grid.innerHTML = `<p style="color:var(--mid-grey);text-align:center;padding:20px;">No other products yet.</p>`;
+    return;
+  }
+
+  grid.innerHTML = picks.map(p => {
+    const oldPriceHTML = p.oldPrice
+      ? `<span style="text-decoration:line-through;color:var(--mid-grey);font-size:0.78rem;margin-left:6px;">${p.oldPrice}</span>`
+      : "";
+    return `
     <a href="product.html?id=${p.id}" class="pdp-suggested-card">
       <div class="pdp-suggested-img">
         <img src="${p.image}" alt="${p.name}" loading="lazy" />
       </div>
       <div class="pdp-suggested-info">
         <div class="pdp-suggested-name">${p.name}</div>
-        <div class="pdp-suggested-price">${p.price}</div>
+        <div class="pdp-suggested-price">${p.price}${oldPriceHTML}</div>
       </div>
     </a>
-  `).join("");
+  `;
+  }).join("");
 }
 
 // -------- Toast --------
@@ -335,6 +356,70 @@ function closeMenu() {
 
 mobileMenuClose.addEventListener("click", closeMenu);
 menuOverlay.addEventListener("click", closeMenu);
+
+// -------- Search --------
+const searchToggle = document.getElementById("search-toggle");
+const searchOverlay = document.getElementById("search-overlay");
+const searchClose = document.getElementById("search-close");
+const searchInput = document.getElementById("search-input");
+
+if (searchToggle && searchOverlay) {
+  searchToggle.addEventListener("click", () => {
+    searchOverlay.classList.add("open");
+    setTimeout(() => searchInput.focus(), 350);
+  });
+
+  function closeSearchOverlay() {
+    searchOverlay.classList.remove("open");
+    searchInput.value = "";
+    const r = document.getElementById("search-results");
+    if (r) r.innerHTML = "";
+    const s = document.getElementById("search-suggestions");
+    if (s) s.style.display = "flex";
+  }
+
+  searchClose.addEventListener("click", closeSearchOverlay);
+
+  function getAllSearchableProducts() {
+    const all = []; const seen = new Set();
+    for (const [key, cat] of Object.entries(PRODUCTS)) {
+      if (key === "sale") continue;
+      for (const p of cat.items) { if (!seen.has(p.id)) { seen.add(p.id); all.push(p); } }
+    }
+    return all;
+  }
+
+  function performSearch(query) {
+    const results = document.getElementById("search-results");
+    const suggestions = document.getElementById("search-suggestions");
+    if (!results) return;
+    const q = query.trim().toLowerCase();
+    if (!q) { results.innerHTML = ""; if (suggestions) suggestions.style.display = "flex"; return; }
+    if (suggestions) suggestions.style.display = "none";
+    const matches = getAllSearchableProducts().filter(p =>
+      (p.name || "").toLowerCase().includes(q) || (p.brand || "").toLowerCase().includes(q)
+    );
+    if (!matches.length) { results.innerHTML = `<div class="search-no-results">No products found for "${query}"</div>`; return; }
+    results.innerHTML = matches.map(p => `
+      <a href="product.html?id=${p.id}" class="search-result-card">
+        <div class="search-result-img"><img src="${p.image}" alt="${p.name}" loading="lazy" /></div>
+        <div class="search-result-info">
+          <div class="search-result-name">${p.name}</div>
+          <div class="search-result-price">${p.price}</div>
+        </div>
+      </a>`).join("");
+  }
+
+  searchInput.addEventListener("input", e => performSearch(e.target.value));
+  searchInput.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); performSearch(searchInput.value); } });
+  document.querySelectorAll(".search-tag").forEach(tag => {
+    tag.addEventListener("click", () => { searchInput.value = tag.textContent; performSearch(tag.textContent); });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { closeSearchOverlay(); closeMenu(); }
+  });
+}
 
 // -------- Init --------
 document.addEventListener("DOMContentLoaded", init);

@@ -9,7 +9,7 @@ function getCat() {
 }
 
 // -------- DOM --------
-const catHero = document.getElementById("cat-hero");
+const catHero = document.getElementById("cat-header");
 const catTitle = document.getElementById("cat-title");
 const catCount = document.getElementById("cat-count");
 const breadcrumbCat = document.getElementById("breadcrumb-cat");
@@ -37,8 +37,7 @@ function init() {
   // Set page title
   document.title = `KicksFusion — ${data.title}`;
 
-  // Hero banner
-  catHero.style.backgroundImage = `url('${data.banner}')`;
+  // Header info
   catTitle.textContent = data.title;
   breadcrumbCat.textContent = data.title;
 
@@ -181,13 +180,56 @@ searchToggle.addEventListener("click", () => {
   setTimeout(() => searchInput.focus(), 350);
 });
 
-searchClose.addEventListener("click", () => {
+function closeSearchOverlay() {
   searchOverlay.classList.remove("open");
+  searchInput.value = "";
+  const r = document.getElementById("search-results");
+  if (r) r.innerHTML = "";
+  const s = document.getElementById("search-suggestions");
+  if (s) s.style.display = "flex";
+}
+
+searchClose.addEventListener("click", closeSearchOverlay);
+
+function getAllSearchableProducts() {
+  const all = []; const seen = new Set();
+  for (const [key, cat] of Object.entries(PRODUCTS)) {
+    if (key === "sale") continue;
+    for (const p of cat.items) { if (!seen.has(p.id)) { seen.add(p.id); all.push(p); } }
+  }
+  return all;
+}
+
+function performSearch(query) {
+  const results = document.getElementById("search-results");
+  const suggestions = document.getElementById("search-suggestions");
+  if (!results) return;
+  const q = query.trim().toLowerCase();
+  if (!q) { results.innerHTML = ""; if (suggestions) suggestions.style.display = "flex"; return; }
+  if (suggestions) suggestions.style.display = "none";
+  const matches = getAllSearchableProducts().filter(p =>
+    (p.name || "").toLowerCase().includes(q) || (p.brand || "").toLowerCase().includes(q)
+  );
+  if (!matches.length) { results.innerHTML = `<div class="search-no-results">No products found for "${query}"</div>`; return; }
+  results.innerHTML = matches.map(p => `
+    <a href="product.html?id=${p.id}" class="search-result-card">
+      <div class="search-result-img"><img src="${p.image}" alt="${p.name}" loading="lazy" /></div>
+      <div class="search-result-info">
+        <div class="search-result-name">${p.name}</div>
+        <div class="search-result-price">${p.price}</div>
+      </div>
+    </a>`).join("");
+}
+
+searchInput.addEventListener("input", e => performSearch(e.target.value));
+searchInput.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); performSearch(searchInput.value); } });
+document.querySelectorAll(".search-tag").forEach(tag => {
+  tag.addEventListener("click", () => { searchInput.value = tag.textContent; performSearch(tag.textContent); });
 });
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
-    searchOverlay.classList.remove("open");
+    closeSearchOverlay();
     closeMenu();
   }
 });

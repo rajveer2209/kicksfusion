@@ -382,6 +382,66 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--white);
 }
 
+.search-results {
+  max-width: 700px;
+  margin: 20px auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+.search-results::-webkit-scrollbar { width: 4px; }
+.search-results::-webkit-scrollbar-thumb { background: var(--light-grey); border-radius: 4px; }
+
+.search-result-card {
+  text-decoration: none;
+  color: inherit;
+  background: var(--white);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.search-result-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+.search-result-img {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--off-white);
+}
+.search-result-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+}
+.search-result-info {
+  padding: 10px 12px;
+}
+.search-result-name {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-result-price {
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+.search-no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 30px;
+  color: var(--mid-grey);
+  font-size: 0.9rem;
+}
+
 /* ============================================
    HERO CAROUSEL
    ============================================ */
@@ -733,6 +793,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
+  image-rendering: -webkit-optimize-contrast;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .product-card:hover .product-card-image img { transform: scale(1.05); }

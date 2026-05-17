@@ -68,7 +68,6 @@
         <a href="category.html?cat=sports" class="nav-link">SPORTS</a>
         <a href="category.html?cat=casual" class="nav-link">CASUAL</a>
         <a href="category.html?cat=basketball" class="nav-link">BASKETBALL</a>
-        <a href="category.html?cat=hot-picks" class="nav-link">HOT PICKS</a>
         <a href="category.html?cat=sale" class="nav-link sale-link">SALE 🔥</a>
       </div>
     </div>
@@ -87,11 +86,28 @@
       <a href="category.html?cat=sports">SPORTS</a>
       <a href="category.html?cat=casual">CASUAL</a>
       <a href="category.html?cat=basketball">BASKETBALL</a>
-      <a href="category.html?cat=hot-picks">HOT PICKS</a>
       <a href="category.html?cat=sale" class="sale-link">SALE 🔥</a>
     </div>
   </div>
   <div class="menu-overlay" id="menu-overlay"></div>
+
+  <!-- ========== SEARCH BAR ========== -->
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-bar-wrapper">
+      <input type="text" class="search-input" id="search-input" placeholder="Search sneakers, brands, styles..." />
+      <button class="search-close" id="search-close" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-suggestions" id="search-suggestions">
+      <span class="search-tag">Nike</span>
+      <span class="search-tag">Converse</span>
+      <span class="search-tag">Dunks</span>
+      <span class="search-tag">Air Force 1</span>
+      <span class="search-tag">Jordan</span>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
 
   <!-- ========== PRODUCT DETAIL ========== -->
   <main class="pdp-wrapper">
@@ -236,7 +252,6 @@
             <li><a href="category.html?cat=sports">Sports</a></li>
             <li><a href="category.html?cat=casual">Casual</a></li>
             <li><a href="category.html?cat=basketball">Basketball</a></li>
-            <li><a href="category.html?cat=hot-picks">Hot Picks</a></li>
             <li><a href="category.html?cat=sale">Sale</a></li>
           </ul>
         </div>
@@ -265,6 +280,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 KicksFusion. All rights reserved.</p>
+        <a href="admin.html" style="font-size:0.7rem;color:rgba(255,255,255,0.2);margin-top:4px;display:inline-block;">Admin</a>
       </div>
     </div>
   </footer>

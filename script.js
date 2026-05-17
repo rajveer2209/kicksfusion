@@ -53,10 +53,89 @@ function openSearch() {
 }
 function closeSearch() {
   els.searchOverlay.classList.remove("open");
+  els.searchInput.value = "";
+  const results = document.getElementById("search-results");
+  if (results) results.innerHTML = "";
+  const suggestions = document.getElementById("search-suggestions");
+  if (suggestions) suggestions.style.display = "flex";
 }
 
 els.searchToggle.addEventListener("click", openSearch);
 els.searchClose.addEventListener("click", closeSearch);
+
+// Live search — filter by name or brand
+function getAllSearchableProducts() {
+  const all = [];
+  const seen = new Set();
+  for (const [key, cat] of Object.entries(PRODUCTS)) {
+    if (key === "sale") continue;
+    for (const p of cat.items) {
+      if (!seen.has(p.id)) {
+        seen.add(p.id);
+        all.push(p);
+      }
+    }
+  }
+  return all;
+}
+
+function performSearch(query) {
+  const results = document.getElementById("search-results");
+  const suggestions = document.getElementById("search-suggestions");
+  if (!results) return;
+
+  const q = query.trim().toLowerCase();
+  if (q.length === 0) {
+    results.innerHTML = "";
+    if (suggestions) suggestions.style.display = "flex";
+    return;
+  }
+
+  if (suggestions) suggestions.style.display = "none";
+
+  const all = getAllSearchableProducts();
+  const matches = all.filter(p => {
+    const name = (p.name || "").toLowerCase();
+    const brand = (p.brand || "").toLowerCase();
+    return name.includes(q) || brand.includes(q);
+  });
+
+  if (matches.length === 0) {
+    results.innerHTML = `<div class="search-no-results">No products found for "${query}"</div>`;
+    return;
+  }
+
+  results.innerHTML = matches.map(p => `
+    <a href="product.html?id=${p.id}" class="search-result-card">
+      <div class="search-result-img">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" />
+      </div>
+      <div class="search-result-info">
+        <div class="search-result-name">${p.name}</div>
+        <div class="search-result-price">${p.price}</div>
+      </div>
+    </a>
+  `).join("");
+}
+
+els.searchInput.addEventListener("input", (e) => {
+  performSearch(e.target.value);
+});
+
+els.searchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    performSearch(els.searchInput.value);
+  }
+});
+
+// Search tags click to search
+document.querySelectorAll(".search-tag").forEach(tag => {
+  tag.addEventListener("click", () => {
+    els.searchInput.value = tag.textContent;
+    performSearch(tag.textContent);
+  });
+});
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
