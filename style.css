@@ -1360,8 +1360,8 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
     gap: 32px;
   }
   .newsletter-form { flex-direction: column; }
-  .hero-carousel { height: 75vh; min-height: 480px; }
-  .slide-content h1 { font-size: clamp(1.8rem, 6vw, 3rem); }
+  .hero-carousel { height: 70vh; min-height: 480px; }
+  .slide-content h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
   .product-card { flex: 0 0 180px; }
 }
 
