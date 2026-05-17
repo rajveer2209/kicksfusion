@@ -94,50 +94,6 @@ const PRODUCTS = {
   }
 };
 
-// Load admin-added/edited products from localStorage
-(function loadAdminProducts() {
-  try {
-    const stored = JSON.parse(localStorage.getItem("kf_admin_products")) || [];
-    if (!stored.length) return;
-
-    // Build a map of admin products by ID for fast lookup
-    const adminMap = {};
-    stored.forEach(p => { adminMap[p.id] = p; });
-
-    // Phase 1: Replace edited built-in products & remove from old category if moved
-    for (const [key, cat] of Object.entries(PRODUCTS)) {
-      for (let i = cat.items.length - 1; i >= 0; i--) {
-        const existing = cat.items[i];
-        const adminVersion = adminMap[existing.id];
-        if (adminVersion) {
-          const newCat = adminVersion._category || key;
-          if (newCat === key) {
-            // Same category — replace in-place
-            cat.items[i] = adminVersion;
-          } else {
-            // Category changed — remove from old category
-            cat.items.splice(i, 1);
-            // Will be added to new category in Phase 2
-          }
-          // Mark as handled
-          adminVersion._handled = true;
-        }
-      }
-    }
-
-    // Phase 2: Add new products & moved products to their target category
-    stored.forEach(p => {
-      if (p._handled) { delete p._handled; }
-      const cat = p._category || "casual";
-      if (PRODUCTS[cat]) {
-        if (!PRODUCTS[cat].items.some(x => x.id === p.id)) {
-          PRODUCTS[cat].items.push(p);
-        }
-      }
-    });
-  } catch(e) { /* ignore parse errors */ }
-})();
-
 // Sale — also include products with "sale" badge from any category
 (function populateSale() {
   const seen = new Set(PRODUCTS.sale.items.map(p => p.id));
